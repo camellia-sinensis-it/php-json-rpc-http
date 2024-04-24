@@ -226,7 +226,9 @@ class Client
             $this->throwHttpExceptionOnHttpError($http_response_header);
             $this->deliverResponses($message);
         } catch (ErrorException $exception) {
-            $this->throwHttpExceptionOnHttpError($http_response_header);
+            if (isset($http_response_header)) {
+                $this->throwHttpExceptionOnHttpError($http_response_header);
+            }
             throw $exception;
         } finally {
             restore_error_handler();
