@@ -41,7 +41,10 @@ class HttpResponse
     public static function fromHttpResponseHeader(array $http_response_header)
     {
         $statusLine = array_shift($http_response_header);
-        self::readVersionCodeMessage($statusLine, $version, $code, $message);
+        $version = '1.1';
+        $code = 0;
+        $message = '';
+        self::readVersionCodeMessage((string)$statusLine, $version, $code, $message);
         self::readHeaders($http_response_header, $headers);
 
         return new self($version, $code, $message, $headers);
@@ -89,6 +92,10 @@ class HttpResponse
         $headers = array();
 
         foreach ($http_response_header as $header) {
+            if (strpos($header, ':') === false) {
+                continue;
+            }
+
             list($name, $value) = explode(':', $header, 2);
 
             $headers[$name] = trim($value);
