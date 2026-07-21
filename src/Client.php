@@ -114,7 +114,7 @@ class Client
      *
      * @see http://php.net/manual/en/context.http.php HTTP options
      */
-    public function __construct($uri, array $headers = null, array $options = null)
+    public function __construct($uri, ?array $headers = null, ?array $options = null)
     {
         $this->requiredHttpHeaders = array(
             'Accept' => self::$CONTENT_TYPE,
@@ -449,7 +449,7 @@ class Client
     public static function onError($level, $message, $file, $line)
     {
         $message = trim($message);
-        $code = null;
+        $code = 0;
 
         throw new ErrorException($message, $code, $level, $file, $line);
     }
