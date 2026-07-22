@@ -217,17 +217,19 @@ class Client
     public function send()
     {
         set_error_handler([__CLASS__, 'onError']);
+        $httpResponseHeader = null;
 
         try {
             $options = $this->getStreamOptions();
             stream_context_set_option($this->context, $options);
             $message = file_get_contents($this->uri, false, $this->context);
+            $httpResponseHeader = isset($http_response_header) ? $http_response_header : null;
 
-            $this->throwHttpExceptionOnHttpError($http_response_header);
+            $this->throwHttpExceptionOnHttpError($httpResponseHeader);
             $this->deliverResponses($message);
         } catch (ErrorException $exception) {
-            if (isset($http_response_header)) {
-                $this->throwHttpExceptionOnHttpError($http_response_header);
+            if ($httpResponseHeader !== null) {
+                $this->throwHttpExceptionOnHttpError($httpResponseHeader);
             }
             throw $exception;
         } finally {
