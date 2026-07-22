@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=8.2 <8.5",
+        "php": ">=8.2 <8.5.0",
         "datto/json-rpc": "~6.1"
     },
     "autoload": {
