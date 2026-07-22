@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  - Removed the exit statements from the "Server" class, so you can control the
    termination of your own scripts
 
+## [Unreleased]
+### Changed
+ - Added explicit nullable parameter type declarations needed for PHP 8.4 compatibility.
+ - Declared supported PHP versions as 8.2, 8.3, and 8.4.
+
 ## [5.0.5] - 2020-02-28
 ### Changed
  - Updated the internal "datto/json-rpc" dependency
