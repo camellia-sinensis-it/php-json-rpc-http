@@ -29,7 +29,7 @@ class HttpResponse
     /** @var string */
     private $version;
 
-    /** @var integer */
+    /** @var int */
     private $code;
 
     /** @var string */
@@ -82,7 +82,7 @@ class HttpResponse
     {
         if (preg_match("~HTTP/(?<version>[0-9.]+) (?<code>[0-9]+) ?(?<message>.*)~XDs", $input, $match) === 1) {
             $version = $match['version'];
-            $code = (integer)$match['code'];
+            $code = (int)$match['code'];
             $message = $match['message'];
         }
     }
