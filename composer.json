@@ -22,5 +22,12 @@
             "Datto\\JsonRpc\\Http\\Examples\\": "examples/src",
             "Datto\\JsonRpc\\Http\\": "src"
         }
+    },
+    "extra": {
+        "patches": {
+            "lstrojny/fxmlrpc": {
+                "Fix implicit nullable types for PHP 8.4 compatibility": "patches/lstrojny/fxmlrpc/fix-implicit-nullable-types.patch"
+            }
+        }
     }
 }

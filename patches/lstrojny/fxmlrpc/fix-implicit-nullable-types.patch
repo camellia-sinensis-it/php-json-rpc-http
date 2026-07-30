@@ -1,0 +1,51 @@
+diff --git a/src/fXmlRpc/Client.php b/src/fXmlRpc/Client.php
+--- a/src/fXmlRpc/Client.php
++++ b/src/fXmlRpc/Client.php
+@@ -66,9 +66,9 @@
+      */
+     public function __construct(
+         $uri = null,
+-        TransportInterface $transport = null,
+-        ParserInterface $parser = null,
+-        SerializerInterface $serializer = null
++        ?TransportInterface $transport = null,
++        ?ParserInterface $parser = null,
++        ?SerializerInterface $serializer = null
+     )
+     {
+         $this->uri = $uri;
+diff --git a/src/fXmlRpc/Exception/HttpException.php b/src/fXmlRpc/Exception/HttpException.php
+--- a/src/fXmlRpc/Exception/HttpException.php
++++ b/src/fXmlRpc/Exception/HttpException.php
+@@ -27,7 +27,7 @@
+ 
+ final class HttpException extends AbstractTransportException
+ {
+-    public static function httpError($message, $statusCode, Exception $previous = null)
++    public static function httpError($message, $statusCode, ?Exception $previous = null)
+     {
+         return new static('An HTTP error occurred: ' . $message, $statusCode, $previous);
+     }
+diff --git a/src/fXmlRpc/Exception/TransportException.php b/src/fXmlRpc/Exception/TransportException.php
+--- a/src/fXmlRpc/Exception/TransportException.php
++++ b/src/fXmlRpc/Exception/TransportException.php
+@@ -32,6 +32,6 @@
+         $message = $error instanceof Exception ? $error->getMessage() : $error;
+         $previous = $error instanceof Exception ? $error : null;
+ 
+-        return new static('Transport error occurred: ' . $message, null, $previous);
++        return new static('Transport error occurred: ' . $message, 0, $previous);
+     }
+ }
+diff --git a/src/fXmlRpc/MulticallBuilder.php b/src/fXmlRpc/MulticallBuilder.php
+--- a/src/fXmlRpc/MulticallBuilder.php
++++ b/src/fXmlRpc/MulticallBuilder.php
+@@ -52,7 +52,7 @@
+     }
+ 
+     /** {@inheritdoc} */
+-    public function addCall($methodName, array $params = [], callable $onSuccess = null, callable $onError = null)
++    public function addCall($methodName, array $params = [], ?callable $onSuccess = null, ?callable $onError = null)
+     {
+         if (!is_string($methodName)) {
+             throw InvalidArgumentException::expectedParameter(1, 'string', $methodName);
